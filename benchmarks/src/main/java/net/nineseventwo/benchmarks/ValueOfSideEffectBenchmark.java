@@ -70,15 +70,14 @@ public class ValueOfSideEffectBenchmark {
 	}
 
     @Benchmark
-    public String valueOfInteger() {
+    public String integerToString() {
     	value--;
     	
-    	return String.valueOf(value++);
+    	return Integer.toString(value++);
     }
     
-    
     @Benchmark
-    public String valueOfString() {
+    public String stringValueOf() {
         value--;
         
         return String.valueOf(value++);
