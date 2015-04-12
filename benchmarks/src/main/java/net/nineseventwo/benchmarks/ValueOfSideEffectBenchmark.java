@@ -39,6 +39,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -47,45 +48,40 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 public class ValueOfSideEffectBenchmark {
 	
+	private int value;
+	
+	@Setup
+	void setup () { 
+		value = 31337; 
+	}
+	
 	@Benchmark
 	public String concatPrefix() {
-		int value = 31337;
 		value--;
-		
-		String converted = "" + (value++);
-		
-		return converted;
+
+		return "" + (value++);
 	}
 	
 	@Benchmark
 	public String concatPostFix() {
-		int value = 31337;
 		value--;
 		
-		String converted = (value++) + "";
-		
-		return converted;
+		return (value++) + "";
 	}
 
     @Benchmark
     public String valueOfInteger() {
-    	int value = 31337;
     	value--;
     	
-        String converted = String.valueOf(value++);
-        
-        return converted;
+    	return String.valueOf(value++);
     }
     
     
     @Benchmark
     public String valueOfString() {
-    	int value = 31337;
         value--;
         
-        String converted = String.valueOf(value++);
-        
-        return converted;
+        return String.valueOf(value++);
     }
     
 }
