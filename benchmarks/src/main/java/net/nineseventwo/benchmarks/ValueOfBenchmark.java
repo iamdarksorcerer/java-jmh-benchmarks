@@ -66,10 +66,10 @@ public class ValueOfBenchmark {
 	
 	
     @Benchmark
-    public String valueOfInteger() {
+    public String integerToString() {
     	int value = 31337;
         
-        String converted = String.valueOf(value);
+        String converted = Integer.toString(value);
         
         return converted;
     }
