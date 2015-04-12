@@ -36,6 +36,7 @@ import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.Warmup;
 
 import java.util.concurrent.TimeUnit;
@@ -46,41 +47,32 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 public class ValueOfBenchmark {
 
-	@Benchmark
-	public String concatPrefix() {
-		int value = 31337;
-		
-		String converted = "" + value;
-		
-		return converted;
+	private int value = 31337;
+	
+	@Setup
+	void setup () { 
+		value = 31337; 
 	}
 	
 	@Benchmark
-	public String concatPostFix() {
-		int value = 31337;
-		
-		String converted = value + "";
-		
-		return converted;
+	public String concatPrefix() {	
+		return "" + value;
+	}
+	
+	@Benchmark
+	public String concatPostFix() {		
+		return  value + "";
 	}
 	
 	
     @Benchmark
-    public String integerToString() {
-    	int value = 31337;
-        
-        String converted = Integer.toString(value);
-        
-        return converted;
+    public String integerToString() {        
+        return Integer.toString(value);
     }
     
     
     @Benchmark
     public String valueOfString() {
-    	int value = 31337;
-        
-        String converted = String.valueOf(value);
-        
-        return converted;
+        return String.valueOf(value);
     }
 }
