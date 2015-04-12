@@ -50,7 +50,7 @@ public class ValueOfBenchmark {
 	public String concatPrefix() {
 		int value = 31337;
 		
-		String converted = value + "";
+		String converted = "" + value;
 		
 		return converted;
 	}
